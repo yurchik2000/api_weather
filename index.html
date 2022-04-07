@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="weather__inner">
+            <div class="location">                                
+                <p class="location__text">Your Location Now</p>
+                <h1 class="location__address">London, Great Britain</h1>
+            </div>
+            <p class="temperature">20&deg;C</p>
+            <img class="weather__img" src="http://openweathermap.org/img/wn/10d@2x.png" alt="" >
+            <p class="weather__description">Clouds</p>            
+            <div class="weather__info">
+                <p class="info__text wind">5km/h</p>
+                <p class="info__text humidity">7%</p>
+                <p class="info__text pressure">0.533mBar</p>
+            </div>
+            <ul class="content__list">
+                <li class="content__item">
+                    <p class="content__title">Temperature</p>
+                    <select class="select__temp" name="" id="" onChange="updateTemp()">
+                        <option class="" value="cel" >Celsius</option>
+                        <option class="" value="far" >Farengeit</option>
+                    </select>                    
+                </li>
+                <li class="content__item">
+                    <p class="content__title">Wind Speed</p>                    
+                    <select class="select__wind" name="" id="" onChange="updateKm()">
+                        <option value="kmh" class=""> km/h</option>
+                        <option value="ms" class=""> m/s</option>
+                    </select>
+                    <!-- <p class="content__title content__wind">></p>                     -->
+                </li>
+                <li class="content__item">
+                    <p class="content__title">Source</p>
+                    <!-- <p class="content__text">openweathermap.org</p>                     -->
+                    <a class="content__link content__text" href="https://openweathermap.org/" target="_blank">openweathermap.org</a>                                        
+                </li>
+
+            </ul>
+
+        </div>    
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
