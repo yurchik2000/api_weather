@@ -1,6 +1,6 @@
-let lat;
-let lon;
-
+//London coordinate
+let lat = 51.509865;
+let lon = -0.118092;
 
 function success(position){    
   lat = position.coords.latitude;
@@ -9,8 +9,12 @@ function success(position){
   showPosition1(lat, lon);  
 }
 
+function error(){
+  showPosition1(lat, lon);  
+}
+
 function getLocation() {
-      navigator.geolocation.getCurrentPosition(success);      
+      navigator.geolocation.getCurrentPosition(success, error);         
 }
 
 getLocation();
@@ -31,8 +35,8 @@ function updateTemp(){
 function celToFar(cel){
   return cel*9/5+32;
 }
-function kmeterToMeter(km){
-  return km*1000/3600;
+function meterToKmeter(m){
+  return m*3600/1000;
 }
 
 function updateKm(){
@@ -44,23 +48,24 @@ function updateKm(){
       else  document.querySelector('.wind').innerHTML = Math.round(windKm) + ' km/h';    
 }
 
-async function showPosition1(lat, lon){        
+function showPosition1(lat, lon){        
     const st = 'https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid=609fbf649cc9b0275d3699be22b12807&units=metric';
-    const dat = await fetch(st)
+    const dat = fetch(st)
     .then (function (resp) { return resp.json() })               
     .then (function (data) {
-      document.querySelector('.location__address').innerText = data.name;                
-        document.querySelector('.temperature').innerHTML = Math.round(data.main.temp) + '&deg;' + 'C';
-        document.querySelector('.weather__img').src="http://openweathermap.org/img/wn/" + data.weather[0]['icon'] + "@2x.png";
-        document.querySelector('.wind').innerText = Math.round(data.wind.speed) + 'km/h';        
-        document.querySelector('.humidity').innerText = data.main.humidity + '%';
-        document.querySelector('.pressure').innerText = data.main.pressure + 'Pa';
-        document.querySelector('.weather__description').innerText = data.weather[0]['description'];        
         tempC = data.main.temp;
         tempF = celToFar(tempC);
-        windKm = data.wind.speed;
-        windMs = kmeterToMeter(windKm);
+        windMs = data.wind.speed;
+        windKm = meterToKmeter(windMs);
+        document.querySelector('.location__address').innerText = data.name;                
+        document.querySelector('.temperature').innerHTML = Math.round(data.main.temp) + '&deg;' + 'C';
+        document.querySelector('.weather__img').src="http://openweathermap.org/img/wn/" + data.weather[0]['icon'] + "@2x.png";
+        document.querySelector('.wind').innerText = Math.round(data.wind.speed) + 'm/s';        
+        document.querySelector('.humidity').innerText = data.main.humidity + '%';
+        document.querySelector('.pressure').innerText = data.main.pressure + 'Pa';
+        document.querySelector('.weather__description').innerText = data.weather[0]['description'];                        
     })        
 }
+
 
 
